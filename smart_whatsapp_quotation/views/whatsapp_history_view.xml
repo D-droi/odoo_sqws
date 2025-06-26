@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- WhatsApp History Tree View -->
+        <record id="view_whatsapp_history_tree" model="ir.ui.view">
+            <field name="name">whatsapp.history.tree</field>
+            <field name="model">whatsapp.history</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="sale_order_id"/>
+                    <field name="send_date"/>
+                    <field name="status"/>
+                    <field name="phone"/>
+                    <field name="message"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- WhatsApp History Form View -->
+        <record id="view_whatsapp_history_form" model="ir.ui.view">
+            <field name="name">whatsapp.history.form</field>
+            <field name="model">whatsapp.history</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="sale_order_id"/>
+                                <field name="send_date"/>
+                                <field name="status"/>
+                            </group>
+                            <group>
+                                <field name="phone"/>
+                            </group>
+                        </group>
+                        <group>
+                            <field name="message"/>
+                            <field name="response"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- WhatsApp History Search View -->
+        <record id="view_whatsapp_history_search" model="ir.ui.view">
+            <field name="name">whatsapp.history.search</field>
+            <field name="model">whatsapp.history</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="sale_order_id"/>
+                    <field name="phone"/>
+                    <field name="status"/>
+                    <filter string="Sent" name="sent" domain="[('status', '=', 'sent')]"/>
+                    <filter string="Failed" name="failed" domain="[('status', '=', 'failed')]"/>
+                    <group expand="0" string="Group By">
+                        <filter string="Status" name="group_status" context="{'group_by': 'status'}"/>
+                        <filter string="Sale Order" name="group_sale_order" context="{'group_by': 'sale_order_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!-- WhatsApp History Action -->
+        <record id="action_whatsapp_history" model="ir.actions.act_window">
+            <field name="name">WhatsApp History</field>
+            <field name="res_model">whatsapp.history</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context">{}</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    No WhatsApp history found
+                </p>
+                <p>
+                    WhatsApp history will appear here when you send quotations via WhatsApp.
+                </p>
+            </field>
+        </record>
+
+        <!-- Menu Item for WhatsApp History -->
+        <menuitem id="menu_whatsapp_history"
+                  name="WhatsApp History"
+                  parent="sale.menu_sale_config"
+                  action="action_whatsapp_history"
+                  sequence="100"/>
+    </data>
+</odoo> 

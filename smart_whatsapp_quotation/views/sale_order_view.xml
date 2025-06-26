@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Inherit Sale Order Form View -->
+        <record id="view_order_form_inherit_whatsapp" model="ir.ui.view">
+            <field name="name">sale.order.form.inherit.whatsapp</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//header" position="inside">
+                    <button name="action_send_whatsapp" 
+                            type="object" 
+                            string="Send via WhatsApp" 
+                            class="btn-primary"
+                            attrs="{'invisible': [('state', 'in', ['draft', 'cancel'])]}"/>
+                </xpath>
+                
+                <xpath expr="//notebook" position="inside">
+                    <page string="WhatsApp" name="whatsapp_tab">
+                        <group>
+                            <group string="WhatsApp Settings">
+                                <field name="whatsapp_enabled" widget="boolean_toggle"/>
+                                <field name="whatsapp_phone" 
+                                       attrs="{'required': [('whatsapp_enabled', '=', True)]}"/>
+                                <field name="whatsapp_template" 
+                                       attrs="{'invisible': [('whatsapp_enabled', '=', False)]}"/>
+                            </group>
+                            <group string="WhatsApp Status">
+                                <field name="whatsapp_sent" readonly="1"/>
+                                <field name="whatsapp_sent_date" readonly="1"/>
+                                <field name="whatsapp_status" readonly="1"/>
+                            </group>
+                        </group>
+                        
+                        <group string="WhatsApp History" attrs="{'invisible': [('whatsapp_sent', '=', False)]}">
+                            <field name="whatsapp_history_ids" readonly="1">
+                                <tree>
+                                    <field name="send_date"/>
+                                    <field name="status"/>
+                                    <field name="message"/>
+                                    <field name="response"/>
+                                </tree>
+                            </field>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- Inherit Sale Order Tree View -->
+        <record id="view_sales_order_tree_inherit_whatsapp" model="ir.ui.view">
+            <field name="name">sale.order.tree.inherit.whatsapp</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_sales_order_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//tree" position="inside">
+                    <field name="whatsapp_sent" widget="boolean_toggle"/>
+                    <field name="whatsapp_status"/>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- Inherit Sale Order Search View -->
+        <record id="view_sales_order_filter_inherit_whatsapp" model="ir.ui.view">
+            <field name="name">sale.order.search.inherit.whatsapp</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_sales_order_filter"/>
+            <field name="arch" type="xml">
+                <xpath expr="//filter[@name='draft']" position="after">
+                    <filter string="WhatsApp Sent" name="whatsapp_sent" domain="[('whatsapp_sent', '=', True)]"/>
+                    <filter string="WhatsApp Not Sent" name="whatsapp_not_sent" domain="[('whatsapp_sent', '=', False)]"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo> 

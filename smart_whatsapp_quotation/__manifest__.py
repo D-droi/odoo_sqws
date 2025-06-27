@@ -27,7 +27,7 @@ Key Features:
     'auto_install': False,
     'application': True,  # Changed to True for app visibility on App Store
     'license': 'LGPL-3',
-    'images': ['static/description/thumbnail.png', 'static/description/icon.png.png', 'static/description/screenshot1.png.png', 'static/description/screenshot2.png.png'],
+    'images': ['static/description/thumbnail.png', 'static/description/screenshot1.png.png', 'static/description/screenshot2.png.png'],
     'price': 20.0,
     'currency': 'EUR',
     'support': 'info@iyinet.com.tr',

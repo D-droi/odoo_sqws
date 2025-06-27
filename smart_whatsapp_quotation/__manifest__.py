@@ -2,17 +2,20 @@
     'name': 'Smart WhatsApp Quotation',
     'version': '14.0.1.0.0',
     'category': 'Sales',
-    'summary': 'Smart WhatsApp integration for sales quotations',
+    'summary': 'Send sales quotations via WhatsApp with PDF links and customizable templates',
     'description': """
-        This module provides smart WhatsApp integration for sales quotations.
-        Features:
-        - Send quotations via WhatsApp
-        - Track quotation status
-        - Automated WhatsApp notifications
-        - Configurable message templates
+Smart WhatsApp Quotation integrates WhatsApp into your Odoo Sales workflow.
+
+Key Features:
+- One-click "Send via WhatsApp" button on quotations
+- Sends public PDF link of the quotation via WhatsApp Web
+- Uses customer's phone number from contact card
+- Supports international phone numbers (+90, +44, etc.)
+- Customizable WhatsApp message template with placeholders
+- No third-party API or WhatsApp Business account required
     """,
-    'author': 'Your Company',
-    'website': 'https://www.yourcompany.com',
+    'author': 'İyinet A.Ş.',
+    'website': 'https://www.iyinet.com.tr',
     'depends': ['sale_management'],
     'data': [
         'security/ir.model.access.csv',
@@ -20,23 +23,16 @@
         'views/sale_order_view.xml',
         'views/whatsapp_history_view.xml',
     ],
-    'demo': [],
     'installable': True,
     'auto_install': False,
-    'application': True,
+    'application': True,  # Changed to True for app visibility on App Store
     'license': 'LGPL-3',
-    'images': [],
-    'price': 0.0,
+    'images': ['static/description/icon.png', 'static/description/screenshot1.png', 'static/description/screenshot2.png'],
+    'price': 20.0,
     'currency': 'EUR',
-    'support': 'support@yourcompany.com',
-    'maintainer': 'Your Company',
+    'support': 'info@iyinet.com.tr',
+    'maintainer': 'İyinet A.Ş.',
     'contributors': [],
-    'external_dependencies': {
-        'python': [],
-        'bin': [],
-    },
+    'external_dependencies': {},
     'assets': {},
-    'uninstall_hook': '',
-    'post_init_hook': '',
-    'pre_init_hook': '',
-} 
+}
